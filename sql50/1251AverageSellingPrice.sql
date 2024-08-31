@@ -1,41 +1,41 @@
-"""Table: Prices
+-- """Table: Prices
 
-+---------------+---------+
-| Column Name   | Type    |
-+---------------+---------+
-| product_id    | int     |
-| start_date    | date    |
-| end_date      | date    |
-| price         | int     |
-+---------------+---------+
-(product_id, start_date, end_date) is the primary key (combination of columns with unique values) for this table.
-Each row of this table indicates the price of the product_id in the period from start_date to end_date.
-For each product_id there will be no two overlapping periods. That means there will be no two intersecting periods for the same product_id.
+-- +---------------+---------+
+-- | Column Name   | Type    |
+-- +---------------+---------+
+-- | product_id    | int     |
+-- | start_date    | date    |
+-- | end_date      | date    |
+-- | price         | int     |
+-- +---------------+---------+
+-- (product_id, start_date, end_date) is the primary key (combination of columns with unique values) for this table.
+-- Each row of this table indicates the price of the product_id in the period from start_date to end_date.
+-- For each product_id there will be no two overlapping periods. That means there will be no two intersecting periods for the same product_id.
  
 
-Table: UnitsSold
+-- Table: UnitsSold
 
-+---------------+---------+
-| Column Name   | Type    |
-+---------------+---------+
-| product_id    | int     |
-| purchase_date | date    |
-| units         | int     |
-+---------------+---------+
-This table may contain duplicate rows.
-Each row of this table indicates the date, units, and product_id of each product sold. 
+-- +---------------+---------+
+-- | Column Name   | Type    |
+-- +---------------+---------+
+-- | product_id    | int     |
+-- | purchase_date | date    |
+-- | units         | int     |
+-- +---------------+---------+
+-- This table may contain duplicate rows.
+-- Each row of this table indicates the date, units, and product_id of each product sold. 
  
 
-Write a solution to find the average selling price for each product. average_price should be rounded to 2 decimal places.
+-- Write a solution to find the average selling price for each product. average_price should be rounded to 2 decimal places.
 
-Return the result table in any order.
+-- Return the result table in any order.
 
-The result format is in the following example.
-Explanation: 
-Average selling price = Total Price of Product / Number of products sold.
-Average selling price for product 1 = ((100 * 5) + (15 * 20)) / 115 = 6.96
-Average selling price for product 2 = ((200 * 15) + (30 * 30)) / 230 = 16.96
-"""
+-- The result format is in the following example.
+-- Explanation: 
+-- Average selling price = Total Price of Product / Number of products sold.
+-- Average selling price for product 1 = ((100 * 5) + (15 * 20)) / 115 = 6.96
+-- Average selling price for product 2 = ((200 * 15) + (30 * 30)) / 230 = 16.96
+-- """
 #Solution 1: 
 SELECT p.product_id, ROUND(SUM(u.units*p.price)/SUM(u.units),2) AS average_price
 FROM Prices p JOIN UnitsSold u USING(product_id)
